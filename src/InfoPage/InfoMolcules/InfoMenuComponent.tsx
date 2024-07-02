@@ -1,13 +1,17 @@
 //밀키트 메뉴 출력 컴포넌트
 //데이터 넣어서 찍어봐야 감 잡을 수 있을 듯요
 
-import { InfoMenuListProps } from "./InfoMenuList";
+export type InfoMenuComponentProps = {
+  menuName: string;
+  menuIngredient: string;
+  menuQuantity: number;
+};
 
-const InfoMenu = ({
+const InfoMenuComponent = ({
   menuName,
   menuIngredient,
   menuQuantity,
-}: InfoMenuListProps) => {
+}: InfoMenuComponentProps) => {
   return (
     <div className="flex justify-between items-center text-base h-24 gap-1 border">
       <span>{menuName}</span>
@@ -22,4 +26,4 @@ const InfoMenu = ({
   );
 };
 
-export default InfoMenu;
+export default InfoMenuComponent;

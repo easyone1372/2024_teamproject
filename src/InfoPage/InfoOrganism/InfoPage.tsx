@@ -1,17 +1,20 @@
+import InfoPageList from "../InfoMolcules/InfoPageList";
 import InfoPageComponent from "../InfoMolcules/InfoPageComponent";
+import InfoMenuList from "../InfoMolcules/InfoMenuList";
+import InfoHeader from "../InfoMolcules/InfoHeader";
 
 const InfoPage = () => {
-  <InfoPageComponent
-    infoTitle={"가나다라"}
-    infoStarNum={4}
-    infoMainImg={"메인이미지"}
-    infoSubImg={"서브이미지"}
-    infoLocation={"부평"}
-    infoCall={"010-5555-5555"}
-    infoSubTitle={"영업시간"}
-    infoOpenDay={"화요일"}
-    infoOpenTime={"09:00-16:00"}
-  />;
+  return (
+    <div>
+      <div className="bg-slate-50 w-screen h-screen">
+        <div className="max-w-6xl w-full my-0 mx-auto gap-3.5 bg-white mb-11">
+          <InfoHeader />
+          <InfoPageList />
+          <InfoMenuList />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default InfoPage;

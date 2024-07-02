@@ -4,7 +4,7 @@ import InfoMiddleBox from "./InfoMiddleBox";
 import InfoTitleBox from "./InfoTitleBox";
 import InfoTopImage from "./InfoTopImage";
 
-type InfoPageComponentProps = {
+export type InfoPageComponentProps = {
   infoTitle: string;
   infoStarNum: number;
   infoMainImg: string;
@@ -28,16 +28,12 @@ const InfoPageComponent = ({
   infoOpenTime,
 }: InfoPageComponentProps) => {
   return (
-    <div className="bg-slate-50 w-screen h-screen">
-      <div className="max-w-6xl w-full my-0 mx-auto gap-3.5 bg-white mb-11">
-        <div className="max-w-5xl w-full my-0 mx-auto ">
-          <InfoTopImage mainImg={infoMainImg} subImg={infoSubImg} />
-          <InfoTitleBox titleContent={infoTitle} titleStarNum={infoStarNum} />
-          <InfoDescriptionBox location={infoLocation} callNumber={infoCall} />
-          <InfoMiddleBox openDay={infoOpenDay} openTime={infoOpenTime} />
-          <InfoMenuBox />
-        </div>
-      </div>
+    <div className="max-w-5xl w-full my-0 mx-auto ">
+      <InfoTopImage mainImg={infoMainImg} subImg={infoSubImg} />
+      <InfoTitleBox titleContent={infoTitle} titleStarNum={infoStarNum} />
+      <InfoDescriptionBox location={infoLocation} callNumber={infoCall} />
+      <InfoMiddleBox openDay={infoOpenDay} openTime={infoOpenTime} />
+      <InfoMenuBox />
     </div>
   );
 };
