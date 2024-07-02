@@ -26,6 +26,18 @@ connection.connect((err: QueryError | null) => {
   console.log("Connected to the MySQL server.");
 });
 
+app.get("/infoPage", (res: any, req: any) => {
+  const query = `SELECT storeName, storeStar, storeLocation, storeCall, mealMainImg, storeOpenDay, mealSubImg FROM storeInfo`;
+  connection.query(query, (err: any, results: any) => {
+    if (err) {
+      console.error("Error executing query:", err);
+      res.status(500).send("Error fetching data");
+      return;
+    }
+    res.json(results);
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

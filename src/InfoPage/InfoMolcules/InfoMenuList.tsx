@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import InfoMenuComponent, { InfoMenuComponentProps } from "./InfoMenuComponent";
+import axios from "axios";
 
 const InfoMenuList = () => {
   const [infoMenuList, setInfoMenuList] = useState<InfoMenuComponentProps[]>(
@@ -9,8 +10,8 @@ const InfoMenuList = () => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await fetch("https://localhost:3000/api/infoMenu");
-        const data: InfoMenuComponentProps[] = await response.json();
+        const response = await axios.get("https://localhost:3000/api/infoMenu");
+        const data = response.data;
         setInfoMenuList(data);
       } catch (error) {
         console.error("Error fetching menu data", error);

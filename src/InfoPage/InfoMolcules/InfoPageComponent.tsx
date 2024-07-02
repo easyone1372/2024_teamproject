@@ -5,34 +5,34 @@ import InfoTitleBox from "./InfoTitleBox";
 import InfoTopImage from "./InfoTopImage";
 
 export type InfoPageComponentProps = {
-  infoTitle: string;
-  infoStarNum: number;
-  infoMainImg: string;
-  infoSubImg: string;
-  infoLocation: string;
-  infoCall: string;
+  storeName: string;
+  storeStar: number;
+  mealMainImg: string;
+  mealSubImg: string;
+  storeLocation: string;
+  storeCall: string;
   infoSubTitle: string;
-  infoOpenDay: string;
+  storeOpenDay: string;
   infoOpenTime: string;
 };
 
 //이게맞아?
 const InfoPageComponent = ({
-  infoTitle,
-  infoStarNum,
-  infoMainImg,
-  infoSubImg,
-  infoLocation,
-  infoCall,
-  infoOpenDay,
+  storeName,
+  storeStar,
+  mealMainImg,
+  mealSubImg,
+  storeLocation,
+  storeCall,
+  storeOpenDay,
   infoOpenTime,
 }: InfoPageComponentProps) => {
   return (
     <div className="max-w-5xl w-full my-0 mx-auto ">
-      <InfoTopImage mainImg={infoMainImg} subImg={infoSubImg} />
-      <InfoTitleBox titleContent={infoTitle} titleStarNum={infoStarNum} />
-      <InfoDescriptionBox location={infoLocation} callNumber={infoCall} />
-      <InfoMiddleBox openDay={infoOpenDay} openTime={infoOpenTime} />
+      <InfoTopImage mainImg={mealMainImg} subImg={mealSubImg} />
+      <InfoTitleBox titleContent={storeName} titleStarNum={storeStar} />
+      <InfoDescriptionBox location={storeLocation} callNumber={storeCall} />
+      <InfoMiddleBox openDay={storeOpenDay} openTime={infoOpenTime} />
       <InfoMenuBox />
     </div>
   );
