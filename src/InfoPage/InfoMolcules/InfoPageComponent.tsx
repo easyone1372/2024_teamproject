@@ -11,9 +11,9 @@ export type InfoPageComponentProps = {
   mealSubImg: string;
   storeLocation: string;
   storeCall: string;
-  infoSubTitle: string;
   storeOpenDay: string;
-  infoOpenTime: string;
+  openTime: string;
+  closeTime: string;
 };
 
 //이게맞아?
@@ -25,14 +25,19 @@ const InfoPageComponent = ({
   storeLocation,
   storeCall,
   storeOpenDay,
-  infoOpenTime,
+  openTime,
+  closeTime,
 }: InfoPageComponentProps) => {
   return (
     <div className="max-w-5xl w-full my-0 mx-auto ">
       <InfoTopImage mainImg={mealMainImg} subImg={mealSubImg} />
       <InfoTitleBox titleContent={storeName} titleStarNum={storeStar} />
       <InfoDescriptionBox location={storeLocation} callNumber={storeCall} />
-      <InfoMiddleBox openDay={storeOpenDay} openTime={infoOpenTime} />
+      <InfoMiddleBox
+        openDay={storeOpenDay}
+        openTime={openTime}
+        closeTime={closeTime}
+      />
       <InfoMenuBox />
     </div>
   );

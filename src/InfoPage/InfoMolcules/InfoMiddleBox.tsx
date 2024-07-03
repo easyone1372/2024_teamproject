@@ -5,14 +5,23 @@ import InfoSubTitle from "../InfoAtom/InfoSubTitle";
 
 type InfoMiddleBoxProps = {
   openDay: string;
-  openTime: string;
+  openTime?: string;
+  closeTime?: string;
 };
 
-const InfoMiddleBox = ({ openDay, openTime }: InfoMiddleBoxProps) => {
+const InfoMiddleBox = ({
+  openDay,
+  openTime,
+  closeTime,
+}: InfoMiddleBoxProps) => {
   return (
     <div className="mt-4">
       <InfoSubTitle content={"영업시간"} />
-      <InfoDayDetail dayInfo={openDay} dayTimeInfo={openTime} />
+      <InfoDayDetail
+        dayInfo={openDay}
+        dayOpenTime={openTime}
+        dayClosetime={closeTime}
+      />
     </div>
   );
 };

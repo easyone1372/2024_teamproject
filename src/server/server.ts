@@ -1,16 +1,16 @@
+import express, { Request, Response } from "express";
+import mysql, { QueryError } from "mysql2";
+import cors from "cors";
 import bodyParser from "body-parser";
-import { QueryError } from "mysql2";
 
-const express = require("express");
+// Express 애플리케이션 설정
 const app = express();
-const mysql = require("mysql2");
-const cors = require("cors");
 const port = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
 
-const connection = mysql.createConnection({
+const dbConfig = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "6428",
@@ -18,7 +18,7 @@ const connection = mysql.createConnection({
   timezone: "Z", // 'Z'는 UTC 시간대를 의미
 });
 
-connection.connect((err: QueryError | null) => {
+dbConfig.connect((err: QueryError | null) => {
   if (err) {
     console.error("Error connecting to the database:", err);
     return;
@@ -26,15 +26,27 @@ connection.connect((err: QueryError | null) => {
   console.log("Connected to the MySQL server.");
 });
 
-app.get("/infoPage", (res: any, req: any) => {
-  const query = `SELECT storeName, storeStar, storeLocation, storeCall, mealMainImg, storeOpenDay, mealSubImg FROM storeInfo`;
-  connection.query(query, (err: any, results: any) => {
+app.get("/infoPage", (res: Response, req: Request) => {
+  const query = `SELECT 
+      si.storeId, 
+      si.storeName, 
+      si.storeStar, 
+      si.storeLocation, 
+      si.storeCall, 
+      si.mealMainImg, 
+      si.mealSubImg,
+      soh.dayOfWeek,
+      soh.openTime,
+      soh.closeTime
+    FROM storeInfo si
+    JOIN storeOperatingHours soh ON si.storeId = soh.storeId`;
+  dbConfig.query(query, (err: QueryError | null, result: any) => {
     if (err) {
-      console.error("Error executing query:", err);
-      res.status(500).send("Error fetching data");
+      console.error("Error executing the query:", err);
+      res.status(500).json({ error: "Internal server error" });
       return;
     }
-    res.json(results);
+    res.json(result);
   });
 });
 

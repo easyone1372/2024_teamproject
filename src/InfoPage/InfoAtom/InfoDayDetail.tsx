@@ -9,14 +9,21 @@
 //가능하게 되면 영업시간 - 영업중 표시할 수 있도록 분리하기
 type InfoDayDetailProps = {
   dayInfo: string;
-  dayTimeInfo: string;
+  dayOpenTime?: string;
+  dayClosetime?: string;
 };
 
-const InfoDayDetail = ({ dayInfo, dayTimeInfo }: InfoDayDetailProps) => {
+const InfoDayDetail = ({
+  dayInfo,
+  dayOpenTime,
+  dayClosetime,
+}: InfoDayDetailProps) => {
   return (
     <div className="flex w-full gap-1 text-sm font-normal justify-between">
       <div>{dayInfo}</div>
-      <div>{dayTimeInfo}</div>
+      <div>
+        {dayOpenTime}-{dayClosetime}
+      </div>
     </div>
   );
 };

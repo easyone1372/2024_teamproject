@@ -13,6 +13,7 @@ const InfoPageList = () => {
       try {
         const response = await axios.get("https://localhost:3000/api/infoPage");
         const data = response.data;
+        console.log(data);
         setInfoPageList(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -29,13 +30,13 @@ const InfoPageList = () => {
           key={index}
           storeName={data.storeName}
           storeStar={data.storeStar}
+          mealMainImg={data.mealMainImg}
+          mealSubImg={data.mealSubImg}
           storeLocation={data.storeLocation}
           storeCall={data.storeCall}
-          mealMainImg={data.mealMainImg}
           storeOpenDay={data.storeOpenDay}
-          mealSubImg={data.mealSubImg}
-          infoOpenTime={data.infoOpenTime}
-          infoSubTitle={"영업시간"}
+          openTime={data.openTime}
+          closeTime={data.closeTime}
         />
       ))}
     </div>
