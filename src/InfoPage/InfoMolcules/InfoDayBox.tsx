@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { InfoPageBoxProps } from "./InfoPageBox";
 import InfoDayDetail, { InfoDayDetailProps } from "../InfoAtom/InfoDayDetail";
+import { InfoPageBoxProps } from "./InfoPageBox";
 import axios from "axios";
 
 const InfoDayBox = ({ storeId }: InfoPageBoxProps) => {
@@ -10,7 +10,7 @@ const InfoDayBox = ({ storeId }: InfoPageBoxProps) => {
     const fetchDays = async () => {
       try {
         const response = await axios.get(
-          `https://localhost:3000/api/infoTime/${storeId}`
+          `http://localhost:3000/api/infoTime/${storeId}`
         );
         const data = response.data;
         const mappedData = data.map((item: any) => ({

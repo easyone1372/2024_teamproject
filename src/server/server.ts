@@ -78,11 +78,12 @@ app.get("/api/infoMenu", (req: Request, res: Response) => {
   const query = `
     SELECT 
       Menus.name AS kitName, 
-      MenuIngredients.ingredient AS kitIngredient, 
+      GROUP_CONCAT(MenuIngredients.ingredient SEPARATOR ', ') AS kitIngredient, 
       Inventory.quantity AS kitCount
     FROM Menus
     LEFT JOIN MenuIngredients ON Menus.menu_id = MenuIngredients.menu_id
-    LEFT JOIN Inventory ON Menus.menu_id = Inventory.menu_id;
+    LEFT JOIN Inventory ON Menus.menu_id = Inventory.menu_id
+    GROUP BY Menus.name, Inventory.quantity;
   `;
   dbConfig.query(query, (err: QueryError | null, result: any) => {
     if (err) {
@@ -94,7 +95,7 @@ app.get("/api/infoMenu", (req: Request, res: Response) => {
   });
 });
 
-app.get("/api/infoTime:storeId", (req: Request, res: Response) => {
+app.get("/api/infoTime/:storeId", (req: Request, res: Response) => {
   const { storeId } = req.params;
   const query = `
     SELECT

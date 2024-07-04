@@ -11,7 +11,10 @@ const InfoMenuList = () => {
     const fetchMenu = async () => {
       try {
         const response = await axios.get("http://localhost:3000/api/infoMenu");
-        const data = response.data;
+        const data = response.data.map((item: any) => ({
+          ...item,
+          kitIngredient: item.kitIngredient.split(", "), // kitIngredient를 문자열 배열로 변환
+        }));
         console.log(data);
         setInfoMenuList(data);
       } catch (error) {
