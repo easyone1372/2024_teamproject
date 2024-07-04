@@ -7,7 +7,7 @@ export type infoContentProps = {
 const InfoImage = ({ content }: infoContentProps) => {
   return (
     <div className="w-full">
-      <img className="size-full object-cover" src={content}></img>
+      <img className="size-full object-cover" src={`${content}`}></img>
     </div>
   );
 };

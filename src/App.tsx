@@ -3,13 +3,16 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import InfoPage from "./InfoPage/InfoOrganism/InfoPage";
 
 function App() {
+  const storeId = 1;
+
   return (
     <div className="App">
-      <Router>
+      {/* <Router>
         <Routes>
           <Route path="/information" element={<InfoPage />} />
         </Routes>
-      </Router>
+      </Router> */}
+      <InfoPage storeId={storeId} />
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import InfoDetail from "../InfoAtom/InfoDetail";
 import InfoStar from "../InfoAtom/InfoStar";
 import InfoTitle from "../InfoAtom/InfoTitle";
 

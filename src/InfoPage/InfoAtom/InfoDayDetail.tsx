@@ -7,23 +7,29 @@
 //넣어도 되고 빼도 되고 곰곰..곰...곰......곰문곰문...
 
 //가능하게 되면 영업시간 - 영업중 표시할 수 있도록 분리하기
-type InfoDayDetailProps = {
+export type InfoDayDetailProps = {
   dayInfo: string;
-  dayOpenTime?: string;
-  dayClosetime?: string;
+  dayOpenTime: string;
+  dayCloseTime: string;
+  isClosed: boolean;
 };
 
 const InfoDayDetail = ({
   dayInfo,
   dayOpenTime,
-  dayClosetime,
+  dayCloseTime,
+  isClosed,
 }: InfoDayDetailProps) => {
   return (
     <div className="flex w-full gap-1 text-sm font-normal justify-between">
       <div>{dayInfo}</div>
-      <div>
-        {dayOpenTime}-{dayClosetime}
-      </div>
+      {isClosed ? (
+        <span>휴무</span>
+      ) : (
+        <div>
+          {dayOpenTime}-{dayCloseTime}
+        </div>
+      )}
     </div>
   );
 };
