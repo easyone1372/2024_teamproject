@@ -21,7 +21,7 @@ const InfoPageBox = ({ storeId }: InfoPageBoxProps) => {
         console.log(data);
         setInfoPageData(data);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("페이지 정보를 받아오지 못했습니다:", error);
       }
     };
 
@@ -36,12 +36,11 @@ const InfoPageBox = ({ storeId }: InfoPageBoxProps) => {
   return (
     <div>
       <InfoPageComponent
-        storeName={infoPageData.storeName}
-        storeRating={infoPageData.storeRating}
-        mainImageUrl={infoPageData.mainImageUrl}
-        subImageUrl={infoPageData.subImageUrl}
-        storeAddress={infoPageData.storeAddress}
-        storePhone={infoPageData.storePhone}
+        name={infoPageData.name}
+        rating={infoPageData.rating}
+        imageUrl={infoPageData.imageUrl}
+        address={infoPageData.address}
+        phone={infoPageData.phone}
       />
     </div>
   );

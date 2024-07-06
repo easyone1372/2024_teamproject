@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import InfoMenuComponent, { InfoMenuComponentProps } from "./InfoMenuComponent";
 import axios from "axios";
 
-const InfoMenuList = () => {
+export type InfoMenuListProps = {
+  storeId: number;
+};
+
+const InfoMenuList = ({ storeId }: InfoMenuListProps) => {
   const [infoMenuList, setInfoMenuList] = useState<InfoMenuComponentProps[]>(
     []
   );
@@ -10,7 +14,9 @@ const InfoMenuList = () => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/infoMenu");
+        const response = await axios.get(
+          `http://localhost:3000/api/infoMenu/${storeId}`
+        );
         const data = response.data.map((item: any) => ({
           ...item,
           kitIngredient: item.kitIngredient.split(", "), // kitIngredient를 문자열 배열로 변환
@@ -23,7 +29,7 @@ const InfoMenuList = () => {
     };
 
     fetchMenu();
-  }, []);
+  }, [storeId]);
 
   return (
     <div>

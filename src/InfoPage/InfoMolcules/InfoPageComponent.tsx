@@ -3,28 +3,26 @@ import InfoTitleBox from "./InfoTitleBox";
 import InfoTopImage from "./InfoTopImage";
 
 export type InfoPageComponentProps = {
-  storeName: string;
-  storeRating: number;
-  mainImageUrl: string;
-  subImageUrl: string;
-  storeAddress: string;
-  storePhone: string;
+  name: string;
+  rating: number;
+  imageUrl: string;
+  address: string;
+  phone: string;
 };
 
 //이게맞아?
 const InfoPageComponent = ({
-  storeName,
-  storeRating,
-  mainImageUrl,
-  subImageUrl,
-  storeAddress,
-  storePhone,
+  name,
+  rating,
+  imageUrl,
+  address,
+  phone,
 }: InfoPageComponentProps) => {
   return (
     <div className="max-w-5xl w-full my-0 mx-auto ">
-      <InfoTopImage mainImg={mainImageUrl} subImg={subImageUrl} />
-      <InfoTitleBox titleContent={storeName} titleStarNum={storeRating} />
-      <InfoDescriptionBox location={storeAddress} callNumber={storePhone} />
+      <InfoTopImage mainImg={imageUrl} />
+      <InfoTitleBox titleContent={name} titleStarNum={rating} />
+      <InfoDescriptionBox location={address} callNumber={phone} />
     </div>
   );
 };

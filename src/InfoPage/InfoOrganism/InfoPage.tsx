@@ -10,7 +10,7 @@ const InfoPage = ({ storeId }: InfoPageBoxProps) => {
           {/*<InfoHeader />*/}
           <InfoPageBox storeId={storeId} />
           <InfoMiddleBox storeId={storeId} />
-          <InfoMenuBox />
+          <InfoMenuBox storeId={storeId} />
         </div>
       </div>
     </div>

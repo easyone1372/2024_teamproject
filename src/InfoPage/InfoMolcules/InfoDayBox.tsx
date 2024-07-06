@@ -14,10 +14,10 @@ const InfoDayBox = ({ storeId }: InfoPageBoxProps) => {
         );
         const data = response.data;
         const mappedData = data.map((item: any) => ({
-          dayInfo: item.day_of_week,
-          dayOpenTime: item.open_time,
-          dayCloseTime: item.close_time,
-          isClosed: item.is_closed,
+          dayInfo: item.storeDayOfWeek,
+          dayOpenTime: item.openTime,
+          dayCloseTime: item.closeTime,
+          isClosed: item.isClosed,
         }));
         console.log(mappedData);
         setDayDetail(mappedData);

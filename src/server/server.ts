@@ -54,15 +54,15 @@ dbConfig.connect((err: QueryError | null) => {
 app.get("/api/infoPage/:storeId", (req: Request, res: Response) => {
   const { storeId } = req.params;
   const query = `
-    SELECT 
-      Stores.name AS storeName, 
-      Stores.rating AS storeRating, 
-      StoreImages.image_url AS mainImageUrl, 
-      Stores.address AS storeAddress, 
-      Stores.phone AS storePhone
-    FROM Stores
-    LEFT JOIN StoreImages ON Stores.store_id = StoreImages.store_id
-    WHERE Stores.store_id = ?;
+     SELECT 
+      stores.name, 
+      stores.rating, 
+      storeImages.imageUrl, 
+      stores.address, 
+      stores.phone
+    FROM stores
+    LEFT JOIN storeImages ON stores.storeId = storeImages.storeId
+    WHERE stores.storeId = ?;
   `;
   dbConfig.query(query, [storeId], (err: QueryError | null, result: any) => {
     if (err) {
@@ -70,25 +70,28 @@ app.get("/api/infoPage/:storeId", (req: Request, res: Response) => {
       res.status(500).json({ error: "Internal server error" });
       return;
     }
-    res.json(result[0]);
+    res.json(result);
   });
 });
 
-app.get("/api/infoMenu", (req: Request, res: Response) => {
+app.get("/api/infoMenu/:storeId", (req: Request, res: Response) => {
+  const { storeId } = req.params;
   const query = `
-    SELECT 
-      Menus.name AS kitName, 
-      GROUP_CONCAT(MenuIngredients.ingredient SEPARATOR ', ') AS kitIngredient, 
-      Inventory.quantity AS kitCount
-    FROM Menus
-    LEFT JOIN MenuIngredients ON Menus.menu_id = MenuIngredients.menu_id
-    LEFT JOIN Inventory ON Menus.menu_id = Inventory.menu_id
-    GROUP BY Menus.name, Inventory.quantity;
+      SELECT 
+        menus.name as kitName, 
+        GROUP_CONCAT(menuIngredients.ingredient SEPARATOR ', ') AS kitIngredient, 
+        inventory.quantity as kitCount
+      FROM menus
+      LEFT JOIN menuIngredients ON menus.menuId = menuIngredients.menuId
+      LEFT JOIN inventory ON menus.menuId = inventory.menuId
+      LEFT JOIN storeMenus ON menus.menuId = storeMenus.menuId
+      WHERE storeMenus.storeId = ?
+      GROUP BY menus.name, inventory.quantity;
   `;
-  dbConfig.query(query, (err: QueryError | null, result: any) => {
+  dbConfig.query(query, [storeId], (err: QueryError | null, result: any) => {
     if (err) {
-      console.error("Error executing the query infoMenu:", err);
-      res.status(500).json({ error: "Internal server error" });
+      console.error("메뉴 정보 조회 중 오류 발생:", err);
+      res.status(500).json({ error: "내부 서버 오류" });
       return;
     }
     res.json(result);
@@ -99,12 +102,12 @@ app.get("/api/infoTime/:storeId", (req: Request, res: Response) => {
   const { storeId } = req.params;
   const query = `
     SELECT
-      day_of_week,
-      open_time,
-      close_time,
-      is_closed
-    FROM StoreHours
-    WHERE store_id = ?;
+      storeDayOfWeek,
+      openTime,
+      closeTime,
+      isClosed
+    FROM storeHours
+    WHERE storeId = ?;
   `;
   dbConfig.query(query, [storeId], (err: QueryError | null, result: any) => {
     if (err) {
@@ -112,7 +115,7 @@ app.get("/api/infoTime/:storeId", (req: Request, res: Response) => {
       res.status(500).json({ error: "내부 서버 오류" });
       return;
     }
-    res.json(result[0]);
+    res.json(result);
   });
 });
 
