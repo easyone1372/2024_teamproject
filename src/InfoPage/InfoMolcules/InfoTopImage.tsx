@@ -2,13 +2,13 @@ import InfoImage from "../InfoAtom/InfoImage";
 
 //상단 이미지 컴포넌트 - 2장
 type InfoTopImageProps = {
-  mainImg: string;
+  imgUrl: string;
 };
 
-const InfoTopImage = ({ mainImg }: InfoTopImageProps) => {
+const InfoTopImage = ({ imgUrl }: InfoTopImageProps) => {
   return (
     <div className="flex w-full h-64 mb-4">
-      <InfoImage content={mainImg} />
+      <InfoImage content={imgUrl} />
     </div>
   );
 };

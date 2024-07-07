@@ -57,7 +57,6 @@ app.get("/api/infoPage/:storeId", (req: Request, res: Response) => {
      SELECT 
       stores.name, 
       stores.rating, 
-      storeImages.imageUrl, 
       stores.address, 
       stores.phone
     FROM stores

@@ -20,7 +20,7 @@ const InfoPageComponent = ({
 }: InfoPageComponentProps) => {
   return (
     <div className="max-w-5xl w-full my-0 mx-auto ">
-      <InfoTopImage mainImg={imageUrl} />
+      <InfoTopImage imgUrl={imageUrl} />
       <InfoTitleBox titleContent={name} titleStarNum={rating} />
       <InfoDescriptionBox location={address} callNumber={phone} />
     </div>
