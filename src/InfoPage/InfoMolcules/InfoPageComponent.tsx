@@ -8,6 +8,8 @@ export type InfoPageComponentProps = {
   imageUrl: string;
   address: string;
   phone: string;
+  storeId: number;
+  userId: number | null;
 };
 
 //이게맞아?
@@ -17,6 +19,8 @@ const InfoPageComponent = ({
   imageUrl,
   address,
   phone,
+  storeId,
+  userId,
 }: InfoPageComponentProps) => {
   console.log("InfoPageComponent에서 렌더됨:", {
     name,
@@ -24,12 +28,19 @@ const InfoPageComponent = ({
     imageUrl,
     address,
     phone,
+    storeId,
+    userId,
   });
 
   return (
     <div className="max-w-5xl w-full my-0 mx-auto ">
       <InfoTopImage imgUrl={imageUrl} />
-      <InfoTitleBox titleContent={name} titleStarNum={rating} />
+      <InfoTitleBox
+        titleContent={name}
+        titleStarNum={rating}
+        storeId={storeId}
+        userId={userId}
+      />
       <InfoDescriptionBox location={address} callNumber={phone} />
     </div>
   );

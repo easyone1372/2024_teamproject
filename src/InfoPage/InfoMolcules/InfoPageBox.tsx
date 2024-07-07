@@ -3,20 +3,28 @@ import InfoPageComponent, { InfoPageComponentProps } from "./InfoPageComponent";
 import axios from "axios";
 
 export type InfoPageBoxProps = {
-  storeId: number; // storeId를 props로 받습니다.
+  storeId: number;
+  userId: number | null;
 };
 
-const InfoPageBox = ({ storeId }: InfoPageBoxProps) => {
-  const [infoPageData, setInfoPageData] =
-    useState<InfoPageComponentProps | null>(null);
+const InfoPageBox = ({ storeId, userId }: InfoPageBoxProps) => {
+  //이코드 이해못함 나중에 다시 천천히 뜯어보기
+  const [infoPageData, setInfoPageData] = useState<Omit<
+    InfoPageComponentProps,
+    "storeId" | "userId"
+  > | null>(null);
 
   useEffect(() => {
     // 서버에서 데이터 가져오기
     const fetchData = async () => {
       try {
-        const response = await axios.get<InfoPageComponentProps>(
-          `http://localhost:3000/api/infoPage/${storeId}`
-        );
+        // const response = await axios.get<InfoPageComponentProps>(
+        //   `http://localhost:3000/api/infoPage/${storeId}`
+        // );
+        const response = await axios.get<
+          Omit<InfoPageComponentProps, "storeId" | "userId">
+        >(`http://localhost:3000/api/infoPage/${storeId}`);
+
         const data = response.data;
         console.log(data);
         setInfoPageData(data);
@@ -33,15 +41,20 @@ const InfoPageBox = ({ storeId }: InfoPageBoxProps) => {
     return <div>Loading...</div>;
   }
   console.log("infoPageData:", infoPageData);
+  // return (
+  //   <div>
+  //     <InfoPageComponent
+  //       name={infoPageData.name}
+  //       rating={infoPageData.rating}
+  //       imageUrl={infoPageData.imageUrl}
+  //       address={infoPageData.address}
+  //       phone={infoPageData.phone}
+  //     />
+  //   </div>
+  // );
   return (
     <div>
-      <InfoPageComponent
-        name={infoPageData.name}
-        rating={infoPageData.rating}
-        imageUrl={infoPageData.imageUrl}
-        address={infoPageData.address}
-        phone={infoPageData.phone}
-      />
+      <InfoPageComponent {...infoPageData} storeId={storeId} userId={userId} />
     </div>
   );
 };

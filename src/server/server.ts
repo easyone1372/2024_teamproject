@@ -119,6 +119,50 @@ app.get("/api/infoTime/:storeId", (req: Request, res: Response) => {
   });
 });
 
+//찜 상태 조회
+app.get("/api/favorites/:userId/:storeId", (req: Request, res: Response) => {
+  const { userId, storeId } = req.params;
+  const query = `
+    SELECT isFavorite
+    FROM favorites
+    WHERE storeId = ? AND userId = ?;
+  `;
+
+  dbConfig.query(
+    query,
+    [userId, storeId],
+    (err: QueryError | null, result: any) => {
+      if (err) {
+        console.error("찜 상태 조회 중 오류 발생:", err);
+        res.status(500).json({ error: "내부 서버 오류" });
+        return;
+      }
+      res.json(result[0] || { isFavorite: false });
+    }
+  );
+});
+
+//찜 상태 업데이트
+app.post("/api/favorites", (req: Request, res: Response) => {
+  const { userId, storeId, isFavorite } = req.body;
+  const query = `
+    INSERT INTO favorites (userId, storeId, isFavorite)
+    VALUES (?, ?, ?)
+    ON DUPLICATE KEY UPDATE isFavorite = VALUES(isFavorite);
+  `;
+  dbConfig.query(
+    query,
+    [userId, storeId, isFavorite],
+    (err: QueryError | null) => {
+      if (err) {
+        console.error("찜 목록 업데이트 중 오류 발생:", err);
+        res.status(500).json({ error: "내부 서버 오류" });
+        return;
+      }
+      res.status(200).json({ success: true });
+    }
+  );
+});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

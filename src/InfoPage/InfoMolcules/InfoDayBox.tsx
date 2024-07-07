@@ -3,7 +3,10 @@ import InfoDayDetail, { InfoDayDetailProps } from "../InfoAtom/InfoDayDetail";
 import { InfoPageBoxProps } from "./InfoPageBox";
 import axios from "axios";
 
-const InfoDayBox = ({ storeId }: InfoPageBoxProps) => {
+export type InfoDayBoxProps = {
+  storeId: number;
+};
+const InfoDayBox = ({ storeId }: InfoDayBoxProps) => {
   const [dayDetail, setDayDetail] = useState<InfoDayDetailProps[]>([]);
 
   useEffect(() => {
