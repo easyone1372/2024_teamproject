@@ -32,7 +32,7 @@ const InfoPageBox = ({ storeId }: InfoPageBoxProps) => {
   if (!infoPageData) {
     return <div>Loading...</div>;
   }
-
+  console.log("infoPageData:", infoPageData);
   return (
     <div>
       <InfoPageComponent

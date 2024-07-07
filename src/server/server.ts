@@ -58,18 +58,19 @@ app.get("/api/infoPage/:storeId", (req: Request, res: Response) => {
       stores.name, 
       stores.rating, 
       stores.address, 
-      stores.phone
+      stores.phone,
+      storeImages.imageUrl 
     FROM stores
     LEFT JOIN storeImages ON stores.storeId = storeImages.storeId
     WHERE stores.storeId = ?;
   `;
   dbConfig.query(query, [storeId], (err: QueryError | null, result: any) => {
     if (err) {
-      console.error("Error executing the query:", err);
-      res.status(500).json({ error: "Internal server error" });
+      console.error("상점 정보 조회 중 오류 발생:", err);
+      res.status(500).json({ error: "내부 서버 오류" });
       return;
     }
-    res.json(result);
+    res.json(result[0]);
   });
 });
 
