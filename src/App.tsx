@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import InfoPage from "./InfoPage/InfoOrganism/InfoPage";
 
 function App() {
@@ -7,12 +7,14 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Router>
+      <Router>
         <Routes>
-          <Route path="/information" element={<InfoPage />} />
+          <Route path="/information/:storeId" element={<InfoPage />} />
         </Routes>
-      </Router> */}
-      <InfoPage storeId={storeId} />
+        <Link to={`/information/${storeId}`}>
+          <button>Go to InfoPage</button>
+        </Link>
+      </Router>
     </div>
   );
 }

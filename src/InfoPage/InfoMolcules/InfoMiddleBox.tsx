@@ -6,7 +6,7 @@ import { InfoPageBoxProps } from "./InfoPageBox";
 
 const InfoMiddleBox = ({ storeId }: InfoPageBoxProps) => {
   return (
-    <div className="mt-4">
+    <div className="mt-4 max-w-5xl w-full my-0 mx-auto mb-9">
       <InfoSubTitle content={"영업시간"} />
       <InfoDayBox storeId={storeId} />
     </div>

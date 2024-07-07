@@ -8,7 +8,10 @@ const InfoBackBtn = () => {
     back("/");
   };
   return (
-    <div className="text-lg" onClick={backBtn}>
+    <div
+      className="text-lg text-white flex text-center p-2.5"
+      onClick={backBtn}
+    >
       <FontAwesomeIcon icon={faArrowLeft} />
     </div>
   );
